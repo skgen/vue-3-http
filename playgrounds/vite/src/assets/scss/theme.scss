@@ -1,0 +1,15 @@
+@import "@patriarche/melkor/style/mixins";
+
+:root {
+    // Generic
+}
+
+* {
+    @include light {
+        // Light
+    }
+
+    @include dark {
+        // Dark
+    }
+}
