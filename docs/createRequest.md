@@ -4,7 +4,7 @@ A function to create/exec/cancel a request the easiest way
 
 ## Definition
 ```typescript
-type Request<TRequest extends AxiosRequestConfig, TResponse> = {
+type Request<TRequest extends AxiosRequestConfig, TResponse = unknown> = {
   exec: (config?: TRequest) => Promise<AxiosResponse<TResponse, TRequest['data']> | null>;
   cancel: () => boolean;
 };
@@ -13,7 +13,7 @@ type RequestConfig = AxiosRequestConfig & {
   throwOnCancel?: boolean;
 };
 
-function createRequest<TRequest extends RequestConfig, TResponse>(
+function createRequest<TRequest extends RequestConfig, TResponse = unknown>(
   defaultRequestConfig?: TRequest,
   options?: CreateRequestOptions,
 ): Request<TRequest, TResponse>

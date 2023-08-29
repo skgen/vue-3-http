@@ -20,7 +20,7 @@ const defaultOptions: UseRequestOptions = {
   watch: true,
 };
 
-export type UseRequestReturnType<TResponse> = {
+export type UseRequestReturnType<TResponse = unknown> = {
   data: Ref<TResponse | null>;
   loading: Ref<boolean>;
   loaded: Ref<boolean>;
@@ -28,7 +28,7 @@ export type UseRequestReturnType<TResponse> = {
   revalidate: () => Promise<void>;
 };
 
-export default function useRequest<TRequest extends AxiosRequestConfig, TResponse>(
+export default function useRequest<TRequest extends AxiosRequestConfig, TResponse = unknown>(
   requestConfig: TRequest,
   options?: Partial<UseRequestOptions>,
 ): UseRequestReturnType<TResponse> {

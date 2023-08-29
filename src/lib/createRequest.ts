@@ -4,7 +4,7 @@ import {
 import merge from 'lodash/merge';
 import { getHttpProvider, type HttpProvider } from '@src/lib/httpProvider';
 
-type Request<TRequest extends AxiosRequestConfig, TResponse> = {
+type Request<TRequest extends AxiosRequestConfig, TResponse = unknown> = {
   exec: (config?: TRequest) => Promise<AxiosResponse<TResponse, TRequest['data']> | null>;
   cancel: () => boolean;
 };
@@ -18,7 +18,7 @@ type CreateRequestOptions = {
   onLoadingChange?: (loading: boolean) => void;
 };
 
-export function createRequest<TRequest extends RequestConfig, TResponse>(
+export function createRequest<TRequest extends RequestConfig, TResponse = unknown>(
   defaultRequestConfig?: TRequest,
   options?: CreateRequestOptions,
 ): Request<TRequest, TResponse> {
