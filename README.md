@@ -73,3 +73,8 @@ A more robust implementation of [useRequest](https://gitlab.com/patriarche/vuejs
 `hydraEntitySchema`: A base schema builder providing attributes of an [Hydra](https://www.markus-lanthaler.com/hydra/) **Entity** request
 
 `hydraCollectionSchema`: A base schema builder providing attributes of an [Hydra](https://www.markus-lanthaler.com/hydra/) **Collection** request
+
+## Re-exports
+
+A list of re-exports from `Axios`,
+see [here](https://gitlab.com/patriarche/vuejs-3/vue-3-http/-/tree/main/docs/axios.md).

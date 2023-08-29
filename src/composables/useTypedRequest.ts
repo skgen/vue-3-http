@@ -7,6 +7,7 @@ import isNil from 'lodash/isNil';
 import useRequest, { type UseRequestOptions, type UseRequestReturnType } from '@src/composables/useRequest';
 import { logger } from '@src/lib/logger';
 import { HttpResponseTypeError } from '@src/models/httpResponseTypeError';
+import { RequestError } from '@src/lib/axios';
 
 export default function useTypedRequest
 <T extends AxiosRequestConfig, S extends z.ZodTypeAny>(
@@ -39,7 +40,7 @@ export default function useTypedRequest
         });
         error.value = typeError;
         logger.error(typeError);
-      } else if (e instanceof Error) {
+      } else if (e instanceof RequestError) {
         error.value = e;
         logger.error(e);
       } else {

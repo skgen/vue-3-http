@@ -9,7 +9,7 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
-import { createRequest, type HttpRequest } from '@patriarche/vue-http';
+import { createRequest, type HttpRequest, RequestError } from '@patriarche/vue-http';
 import { getNameFromEntities } from '@/app/lib/requestExtractor';
 import AppCollection from '@/app/components/AppCollection.vue';
 
@@ -22,7 +22,7 @@ type StarshipsResponse = {
 };
 
 const loading = ref(false);
-const error = ref<Error | null>(null);
+const error = ref<RequestError | null>(null);
 const loaded = ref(false);
 const starships = ref<{ name: string }[]>([]);
 
@@ -46,7 +46,7 @@ async function getData() {
       starships.value = res.data.results;
     }
   } catch (e) {
-    if (e instanceof Error) {
+    if (e instanceof RequestError) {
       error.value = e;
     }
     throw e;
