@@ -16,7 +16,9 @@ export class HttpResponseTypeError extends TypeError {
     if (config.url) {
       precisions.push(`${config.url}`);
     }
-    message += `\non ${precisions.join(' ')}`;
+    message += `\n\non ${precisions.join(' ')}`;
+    message += '\n\n🚫 Errors 🚫\n\n';
+    message += zodError.message;
     super(message);
     this.zodError = zodError;
   }

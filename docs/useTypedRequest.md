@@ -7,7 +7,7 @@ A more robust implementation of [useRequest](https://gitlab.com/patriarche/vuejs
 ## Definition
 ```typescript
 function useTypedRequest
-<T extends AxiosRequestConfig, S extends z.ZodTypeAny>(
+<T extends RequestConfig, S extends z.ZodTypeAny>(
   requestConfig: T,
   responseSchema: S,
   options?: Partial<UseRequestOptions>,

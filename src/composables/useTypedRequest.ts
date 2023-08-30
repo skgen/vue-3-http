@@ -1,4 +1,3 @@
-import type { AxiosRequestConfig } from 'axios';
 import {
   ref, watch, type Ref, computed,
 } from 'vue';
@@ -7,10 +6,10 @@ import isNil from 'lodash/isNil';
 import useRequest, { type UseRequestOptions, type UseRequestReturnType } from '@src/composables/useRequest';
 import { logger } from '@src/lib/logger';
 import { HttpResponseTypeError } from '@src/models/httpResponseTypeError';
-import { RequestError } from '@src/lib/axios';
+import { type RequestConfig, RequestError } from '@src/models/http';
 
 export default function useTypedRequest
-<T extends AxiosRequestConfig, S extends z.ZodTypeAny>(
+<T extends RequestConfig, S extends z.ZodTypeAny>(
   requestConfig: T,
   responseSchema: S,
   options?: Partial<UseRequestOptions>,

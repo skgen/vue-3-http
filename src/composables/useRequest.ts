@@ -1,13 +1,11 @@
 import {
   ref, watch, type Ref, type WatchStopHandle, reactive, toRefs, isReactive,
 } from 'vue';
-import {
-  AxiosError, type AxiosRequestConfig,
-} from 'axios';
 import merge from 'lodash/merge';
 import { createRequest } from '@src/lib/createRequest';
 import type { HttpProvider } from '@src/index';
 import { logger } from '@src/lib/logger';
+import { type RequestConfig, RequestError } from '@src/models/http';
 
 export type UseRequestOptions = {
   immediate: boolean;
@@ -28,7 +26,7 @@ export type UseRequestReturnType<TResponse = unknown> = {
   revalidate: () => Promise<void>;
 };
 
-export default function useRequest<TRequest extends AxiosRequestConfig, TResponse = unknown>(
+export default function useRequest<TRequest extends RequestConfig, TResponse = unknown>(
   requestConfig: TRequest,
   options?: Partial<UseRequestOptions>,
 ): UseRequestReturnType<TResponse> {
@@ -64,7 +62,7 @@ export default function useRequest<TRequest extends AxiosRequestConfig, TRespons
         data.value = res.data as TResponse;
       }
     } catch (e) {
-      if (e instanceof AxiosError) {
+      if (e instanceof RequestError) {
         error.value = e;
         logger.error(e);
       } else {

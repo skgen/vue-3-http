@@ -12,7 +12,7 @@ The current `data`, `loaded`, `loading` states & `error`s, are always the implem
 
 ## Definition
 ```typescript
-function useRequest<TRequest extends AxiosRequestConfig, TResponse>(
+function useRequest<TRequest extends RequestConfig, TResponse>(
   requestConfig: TRequest,
   options?: Partial<UseRequestOptions>,
 ): UseRequestReturnType<TResponse>

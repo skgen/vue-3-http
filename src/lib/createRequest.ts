@@ -1,16 +1,13 @@
 import {
-  CanceledError, type AxiosRequestConfig, type AxiosResponse,
+  CanceledError, type AxiosResponse,
 } from 'axios';
 import merge from 'lodash/merge';
 import { getHttpProvider, type HttpProvider } from '@src/lib/httpProvider';
+import type { RequestConfig } from '@src/models/http';
 
-type Request<TRequest extends AxiosRequestConfig, TResponse = unknown> = {
+type Request<TRequest extends RequestConfig, TResponse = unknown> = {
   exec: (config?: TRequest) => Promise<AxiosResponse<TResponse, TRequest['data']> | null>;
   cancel: () => boolean;
-};
-
-type RequestConfig = AxiosRequestConfig & {
-  throwOnCancel?: boolean;
 };
 
 type CreateRequestOptions = {

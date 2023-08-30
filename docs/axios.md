@@ -17,4 +17,11 @@ The list of all HTTP status code as an enum
 ```typescript
 import { HttpStatusCode } from '@patriarche/vue-auth'
 ```
+## RequestConfig
+
+An alias to `AxiosRequestConfig`
+
+```typescript
+import type { RequestConfig } from '@patriarche/vue-auth'
+```
 

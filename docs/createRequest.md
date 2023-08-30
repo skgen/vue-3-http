@@ -4,13 +4,9 @@ A function to create/exec/cancel a request the easiest way
 
 ## Definition
 ```typescript
-type Request<TRequest extends AxiosRequestConfig, TResponse = unknown> = {
+type Request<TRequest extends RequestConfig, TResponse = unknown> = {
   exec: (config?: TRequest) => Promise<AxiosResponse<TResponse, TRequest['data']> | null>;
   cancel: () => boolean;
-};
-
-type RequestConfig = AxiosRequestConfig & {
-  throwOnCancel?: boolean;
 };
 
 function createRequest<TRequest extends RequestConfig, TResponse = unknown>(
@@ -37,7 +33,7 @@ type CreateRequestOptions = {
 
 ## Return type
 ```typescript
-type Request<TRequest extends AxiosRequestConfig, TResponse> = {
+type Request<TRequest extends RequestConfig, TResponse> = {
   exec: (config?: TRequest) => Promise<AxiosResponse<TResponse, TRequest['data']> | null>;
   cancel: () => boolean;
 };
