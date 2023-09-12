@@ -1,6 +1,3 @@
-// Using
-// @/modules/authentication
-
 import axios, { type AxiosInstance, type CreateAxiosDefaults } from 'axios';
 import merge from 'lodash/merge';
 

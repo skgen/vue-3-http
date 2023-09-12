@@ -26,7 +26,7 @@ export type UseRequestReturnType<TResponse = unknown> = {
   revalidate: () => Promise<void>;
 };
 
-export default function useRequest<TRequest extends RequestConfig, TResponse = unknown>(
+export function useRequest<TRequest extends RequestConfig, TResponse = unknown>(
   requestConfig: TRequest,
   options?: Partial<UseRequestOptions>,
 ): UseRequestReturnType<TResponse> {

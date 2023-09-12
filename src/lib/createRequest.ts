@@ -5,12 +5,12 @@ import merge from 'lodash/merge';
 import { getHttpProvider, type HttpProvider } from '@src/lib/httpProvider';
 import type { RequestConfig } from '@src/models/http';
 
-type Request<TRequest extends RequestConfig, TResponse = unknown> = {
+export type Request<TRequest extends RequestConfig, TResponse = unknown> = {
   exec: (config?: TRequest) => Promise<AxiosResponse<TResponse, TRequest['data']> | null>;
   cancel: () => boolean;
 };
 
-type CreateRequestOptions = {
+export type CreateRequestOptions = {
   httpProvider?: HttpProvider;
   onLoadingChange?: (loading: boolean) => void;
 };

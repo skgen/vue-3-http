@@ -1,11 +1,11 @@
 import { ref, onUnmounted, type Ref } from 'vue';
 import { getHttpProvider, onMainHttpProviderChange, type HttpProvider } from '@src/lib/httpProvider';
 
-type UseHttpProviderReturnType = {
+export type UseHttpProviderReturnType = {
   httpProvider: Ref<HttpProvider>;
 };
 
-export default function useHttpProvider(): UseHttpProviderReturnType {
+export function useHttpProvider(): UseHttpProviderReturnType {
   const httpProvider = ref(getHttpProvider());
 
   const stopListening = onMainHttpProviderChange((newHttpProvider) => {

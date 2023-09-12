@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const hydraViewSchema = z.object({
+export const hydraViewSchema = z.object({
   '@id': z.string(),
   '@type': z.string(),
   'hydra:first': z.string().optional(),

@@ -3,12 +3,12 @@ import {
 } from 'vue';
 import { ZodError, z } from 'zod';
 import isNil from 'lodash/isNil';
-import useRequest, { type UseRequestOptions, type UseRequestReturnType } from '@src/composables/useRequest';
+import { type UseRequestOptions, type UseRequestReturnType, useRequest } from '@src/composables/useRequest';
 import { logger } from '@src/lib/logger';
 import { HttpResponseTypeError } from '@src/models/httpResponseTypeError';
 import { type RequestConfig, RequestError } from '@src/models/http';
 
-export default function useTypedRequest
+export function useTypedRequest
 <T extends RequestConfig, S extends z.ZodTypeAny>(
   requestConfig: T,
   responseSchema: S,
