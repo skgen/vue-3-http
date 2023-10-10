@@ -7,6 +7,7 @@ import { type UseRequestOptions, type UseRequestReturnType, useRequest } from '@
 import { logger } from '@src/lib/logger';
 import { HttpResponseTypeError } from '@src/models/httpResponseTypeError';
 import { type RequestConfig, RequestError } from '@src/models/http';
+import { getHttpProvider } from '@src/lib/httpProvider';
 
 export function useTypedRequest
 <T extends RequestConfig, S extends z.ZodTypeAny>(
@@ -38,10 +39,11 @@ export function useTypedRequest
           method: requestConfig.method ?? null,
         });
         error.value = typeError;
-        logger.error(typeError);
+        if ((options?.httpProvider ?? getHttpProvider()).options.verbose) {
+          logger.error(typeError);
+        }
       } else if (e instanceof RequestError) {
         error.value = e;
-        logger.error(e);
       } else {
         throw e;
       }

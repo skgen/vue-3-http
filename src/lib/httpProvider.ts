@@ -10,16 +10,19 @@ const defaultConfig: CreateAxiosDefaults = {
 
 export type HttpProvider = {
   datasource: AxiosInstance;
+  options: CreateHttpProviderOptions;
 };
 
 let mainHttpProvider: HttpProvider | null = null;
 
 type CreateHttpProviderOptions = {
   main?: boolean;
+  verbose: boolean;
 };
 
 const defaultOptions = {
   main: false,
+  verbose: true,
 };
 
 type ListenerCallback = (httpProvider: HttpProvider) => void;
@@ -38,6 +41,7 @@ export function createHttpProvider(config?: CreateAxiosDefaults, options?: Creat
 
   const httpProvider: HttpProvider = {
     datasource: axios.create(mergedConfig),
+    options: mergedOptions,
   };
 
   if (mergedOptions.main) {
@@ -50,7 +54,7 @@ export function createHttpProvider(config?: CreateAxiosDefaults, options?: Creat
   return httpProvider;
 }
 
-const fallbackHttpProvider: HttpProvider = createHttpProvider(defaultConfig);
+const fallbackHttpProvider: HttpProvider = createHttpProvider();
 
 export function getHttpProvider(): HttpProvider {
   return mainHttpProvider ?? fallbackHttpProvider;

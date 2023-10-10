@@ -4,7 +4,6 @@ import {
 import merge from 'lodash/merge';
 import { createRequest } from '@src/lib/createRequest';
 import type { HttpProvider } from '@src/index';
-import { logger } from '@src/lib/logger';
 import { type RequestConfig, RequestError } from '@src/models/http';
 
 export type UseRequestOptions = {
@@ -64,7 +63,6 @@ export function useRequest<TRequest extends RequestConfig, TResponse = unknown>(
     } catch (e) {
       if (e instanceof RequestError) {
         error.value = e;
-        logger.error(e);
       } else {
         throw e;
       }

@@ -3,7 +3,8 @@ import {
 } from 'axios';
 import merge from 'lodash/merge';
 import { getHttpProvider, type HttpProvider } from '@src/lib/httpProvider';
-import type { RequestConfig } from '@src/models/http';
+import { type RequestConfig } from '@src/models/http';
+import { logger } from '@src/lib/logger';
 
 export type Request<TRequest extends RequestConfig, TResponse = unknown> = {
   exec: (config?: TRequest) => Promise<AxiosResponse<TResponse, TRequest['data']> | null>;
@@ -31,16 +32,20 @@ export function createRequest<TRequest extends RequestConfig, TResponse = unknow
   async function exec<TRequestExec extends RequestConfig>(config?: TRequestExec) {
     type RequestDefaultConfig = typeof defaultAxiosRequestConfig;
     controller = new AbortController();
+    const httpProvider = options?.httpProvider ?? getHttpProvider();
     const merged = merge(merge({}, defaultAxiosRequestConfig), config);
     setLoading(true);
     let res = null;
     try {
-      res = await (options?.httpProvider?.datasource ?? getHttpProvider().datasource)
+      res = await (httpProvider.datasource)
         .request<RequestDefaultConfig & TRequestExec, AxiosResponse<TResponse, RequestDefaultConfig['data'] & TRequestExec['data']>>({
         ...merged,
         signal: controller.signal,
       });
     } catch (e) {
+      if (httpProvider.options.verbose) {
+        logger.error(e);
+      }
       if (e instanceof CanceledError) {
         if (throwOnCancel) {
           throw e;
