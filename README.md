@@ -40,6 +40,16 @@ createHttpProvider({
 });
 ```
 
+### Remove logs
+
+```typescript
+createHttpProvider({
+  baseURL: 'https://swapi.dev/api',
+}, {
+  verbose: false,
+});
+```
+
 ## Main features
 
 ### [createRequest](https://gitlab.com/patriarche/vuejs-3/vue-3-http/-/tree/main/docs/createRequest.md)
